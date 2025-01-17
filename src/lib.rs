@@ -35,7 +35,7 @@ pub fn ui() -> FnResult<String> {
     let api = String::from("https://api.bbki.ng/coc");
     let res = fetch_stats(&api);
     
-    Ok(res.to_html())
+    Ok(res?.to_html())
 }
 
 
