@@ -1,0 +1,8 @@
+{
+  "id": 1,
+  "name": "coc",
+  "description": "a plugin to show bbki.ng's coc stats.",
+  "version": "0.0.1",
+  "status": 0,
+  "route": "部落冲突"
+}
