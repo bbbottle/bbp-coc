@@ -39,7 +39,7 @@ pub fn ui() -> FnResult<String> {
             .map(|r| r.to_html())
             .collect();
     
-    Ok(&content.join("\r\n"))
+    Ok(content.join("\r\n"))
 }
 
 
