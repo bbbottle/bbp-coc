@@ -20,4 +20,4 @@ jobs:
       with:
         hcp_client_id: ${{ secrets.HCP_CLIENT_ID }}
         hcp_client_secret: ${{ secrets.HCP_CLIENT_SECRET }}
-        wasm: "coc.wasm"
+        wasm: "bbp_coc.wasm"
