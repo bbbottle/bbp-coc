@@ -1,5 +1,6 @@
 use extism_pdk::*;
 use serde::{Deserialize, Serialize};
+use std::collections::BTreeMap;
 
 #[derive(Serialize, Deserialize, ToBytes, FromBytes)]
 #[encoding(Json)]
@@ -34,12 +35,12 @@ pub fn ui() -> FnResult<String> {
     let api = String::from("https://api.bbki.ng/coc");
     let res = fetch_stats(&api);
     
-    Ok(res.to_html)
+    Ok(res.to_html())
 }
 
 
 // start with something simple
 #[plugin_fn]
 pub fn coc() -> FnResult<String> {
-    Ok(format!("Work In Progress v0.0.3"))
+    Ok(format!("Work In Progress"))
 }
