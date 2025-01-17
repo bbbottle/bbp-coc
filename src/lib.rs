@@ -14,8 +14,8 @@ pub struct Stats {
 impl Stats {
     fn to_html(&self) -> String {
         format!("
-            <div>{}({})</div>
-            <div>
+            <div>{}(<code>{})</code></div>
+            <div class="flex">
                 {}
                 <img width=24 cross-origin='anonymous' src={} />
             </div>
@@ -35,7 +35,7 @@ fn fetch_stats(api: &String) -> FnResult<Vec<Stats>> {
 }
 
 #[plugin_fn]
-pub fn ui() -> FnResult<String> {
+pub fn coc() -> FnResult<String> {
     let api = String::from("https://api.bbki.ng/coc");
     let res = fetch_stats(&api);
 
@@ -44,11 +44,4 @@ pub fn ui() -> FnResult<String> {
             .collect();
     
     Ok(content.join("\r\n"))
-}
-
-
-// start with something simple
-#[plugin_fn]
-pub fn coc() -> FnResult<String> {
-    Ok(format!("Work In Progress"))
 }
