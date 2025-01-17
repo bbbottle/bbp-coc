@@ -22,7 +22,7 @@ impl Stats {
             <div>{}(<code>{})</code></div>
             <div class='flex'>
                 {}
-                <img width=24 cross-origin='anonymous' src={} />
+                <img width=28 height=28 cross-origin='anonymous' src={} />
             </div>
         ", self.name, self.tag, self.trophies, self.leagueIcon)
     }
