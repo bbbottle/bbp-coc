@@ -11,6 +11,11 @@ pub struct Stats {
     pub trophies: u32
 }
 
+#[host_fn("extism:host/user")]
+extern "ExtismHost" {
+   fn loading(show: String);
+}
+
 impl Stats {
     fn to_html(&self) -> String {
         format!("
@@ -36,12 +41,17 @@ fn fetch_stats(api: &String) -> FnResult<Vec<Stats>> {
 
 #[plugin_fn]
 pub fn coc() -> FnResult<String> {
+    unsafe {
+        let _ = loading("true".to_string());
+    };
     let api = String::from("https://api.bbki.ng/coc");
     let res = fetch_stats(&api);
 
     let content: Vec<String> = res?.iter()
             .map(|r| r.to_html())
             .collect();
-    
+    unsafe {
+        let _ = loading("true".to_string());
+    };
     Ok(content.join("\r\n"))
 }
