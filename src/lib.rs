@@ -51,7 +51,7 @@ pub fn coc() -> FnResult<String> {
             .map(|r| r.to_html())
             .collect();
     unsafe {
-        let _ = loading("true".to_string());
+        let _ = loading("false".to_string());
     };
     Ok(content.join("\r\n"))
 }
