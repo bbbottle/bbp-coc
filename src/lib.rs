@@ -20,7 +20,7 @@ impl Stats {
                 {}
                 <img width=24 crossorigin='anonymous' src={} />
             </li>
-        ", self.name, self.tag, slef.trophies, self.leagueIcon)
+        ", self.name, self.tag, self.trophies, self.leagueIcon)
     }
 }
 
