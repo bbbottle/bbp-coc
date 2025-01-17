@@ -8,6 +8,7 @@ pub struct Stats {
     pub tag: String,
     pub name: String,
     pub leagueIcon: String,
+    pub trophies: u32
 }
 
 impl Stats {
@@ -15,7 +16,11 @@ impl Stats {
         format!("
             <li>{}</li>
             <li>{}</li>
-        ", self.name, self.tag)
+            <li>
+                {}
+                <img width=24 crossorigin='anonymous' src={} />
+            </li>
+        ", self.name, self.tag, slef.trophies, self.leagueIcon)
     }
 }
 
