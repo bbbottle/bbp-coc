@@ -15,7 +15,7 @@ impl Stats {
     fn to_html(&self) -> String {
         format!("
             <div>{}(<code>{})</code></div>
-            <div class="flex">
+            <div class='flex'>
                 {}
                 <img width=24 cross-origin='anonymous' src={} />
             </div>
