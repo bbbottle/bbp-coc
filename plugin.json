@@ -2,7 +2,7 @@
   "id": 2,
   "name": "coc",
   "description": "a plugin to show bbki.ng's coc stats.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "status": 0,
   "route": "部落冲突"
 }
