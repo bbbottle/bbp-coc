@@ -14,12 +14,11 @@ pub struct Stats {
 impl Stats {
     fn to_html(&self) -> String {
         format!("
-            <li>{}</li>
-            <li>{}</li>
-            <li>
+            <div>{}({})</div>
+            <div>
                 {}
-                <img width=24 crossorigin='anonymous' src={} />
-            </li>
+                <img width=24 cross-origin='anonymous' src={} />
+            </div>
         ", self.name, self.tag, self.trophies, self.leagueIcon)
     }
 }
