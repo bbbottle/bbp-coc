@@ -19,7 +19,7 @@ impl Stats {
     }
 }
 
-fn fetch_stats(api: &String) -> FnResult<Stats> {
+fn fetch_stats(api: &String) -> FnResult<Vec<Stats>> {
     let req = HttpRequest{
         url: (&api).to_string(),
         method: Some("GET".to_string()),
@@ -27,15 +27,19 @@ fn fetch_stats(api: &String) -> FnResult<Stats> {
     };
 
     let res = http::request::<()>(&req, None)?;
-    Ok(res.json::<Stats>()?)
+    Ok(res.json::<Vec<Stats>>()?)
 }
 
 #[plugin_fn]
 pub fn ui() -> FnResult<String> {
     let api = String::from("https://api.bbki.ng/coc");
     let res = fetch_stats(&api);
+
+    let content: Vec<String> = res?.iter()
+            .map(|r| r.to_html())
+            .collect();
     
-    Ok(res?.to_html())
+    Ok(&content.join("\r\n"))
 }
 
 
