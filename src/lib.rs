@@ -41,7 +41,7 @@ fn fetch_stats(api: &String) -> FnResult<Vec<Stats>> {
 
 #[plugin_fn]
 pub fn coc() -> FnResult<String> {
-    Ok("Work In Progress"))
+    Ok("Work In Progress")
 }
 
 #[plugin_fn]
