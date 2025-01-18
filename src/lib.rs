@@ -6,13 +6,14 @@ use leptos::prelude::*;
 use leptos_dom::helpers::document;
 
 #[plugin_fn]
-pub fn test() {
+pub fn test() -> FnResult<String>  {
     let target_element = document().get_element_by_id("test").unwrap();
     mount_to(target_element, || view! {
         <div>
             <h1>"Hello, Leptos!"</h1>
         </div>
     });
+    Ok("DONE".to_string())
 }
 
 #[derive(Serialize, Deserialize, ToBytes, FromBytes)]
@@ -37,7 +38,7 @@ impl Stats {
                 {}
                 <img width=28 height=28 cross-origin='anonymous' src={} />
             </div>
-        ", self.name, self.tag, self.trophies, self.leagueIcon)
+        ", self.name, self.tag, self.trophies, self.league_icon)
     }
 }
 
