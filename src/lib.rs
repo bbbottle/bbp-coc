@@ -3,15 +3,15 @@ use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
 use leptos::prelude::*;
-use leptos_dom::helpers::document;
 use leptos::html::HtmlElement;
+use wasm_bindgen::JsCast;
+use web_sys::{Document, HtmlElement, Window};
 
 
 #[plugin_fn]
 pub fn test() -> FnResult<String>  {
     let target_element = document().get_element_by_id("test").unwrap();
-    let target_html_element: HtmlElement = target_element.dyn_into::<HtmlElement>().unwrap();
-    mount_to(target_html_element, || view! {
+    mount_to(target_element, || view! {
         <div>
             <h1>"Hello, Leptos!"</h1>
         </div>
