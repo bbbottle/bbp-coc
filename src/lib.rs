@@ -4,8 +4,8 @@ use std::collections::BTreeMap;
 
 use leptos::prelude::*;
 use leptos::html::HtmlElement;
-use wasm_bindgen::JsCast;
-use web_sys::{Document, HtmlElement, Window};
+use leptos::wasm_bindgen::JsCast;
+use leptos::web_sys::{Document, HtmlElement, Window};
 
 
 #[plugin_fn]
