@@ -3,7 +3,6 @@ use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
 use leptos::prelude::*;
-use leptos::html::HtmlElement;
 use leptos::wasm_bindgen::JsCast;
 use leptos::web_sys::{Document, HtmlElement, Window};
 
