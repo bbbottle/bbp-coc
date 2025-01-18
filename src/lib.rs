@@ -10,7 +10,7 @@ use leptos::web_sys::{Document, HtmlElement, Window};
 #[plugin_fn]
 pub fn test() -> FnResult<String>  {
     let target_element = document().get_element_by_id("test").unwrap();
-    mount_to(target_element, || view! {
+    mount_to(target_element.unchecked_into(), || view! {
         <div>
             <h1>"Hello, Leptos!"</h1>
         </div>
