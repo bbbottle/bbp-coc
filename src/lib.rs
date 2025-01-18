@@ -4,6 +4,8 @@ use std::collections::BTreeMap;
 
 use leptos::prelude::*;
 use leptos_dom::helpers::document;
+use leptos::html::HtmlElement;
+
 
 #[plugin_fn]
 pub fn test() -> FnResult<String>  {
