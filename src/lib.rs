@@ -2,12 +2,24 @@ use extism_pdk::*;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
+use leptos::prelude::*;
+use leptos_dom::helpers::document;
+
+pub fn test() {
+    let target_element = document().get_element_by_id("test").unwrap();
+    mount_to(target_element, || view! {
+        <div>
+            <h1>"Hello, Leptos!"</h1>
+        </div>
+    });
+}
+
 #[derive(Serialize, Deserialize, ToBytes, FromBytes)]
 #[encoding(Json)]
 pub struct Stats {
     pub tag: String,
     pub name: String,
-    pub leagueIcon: String,
+    pub league_icon: String,
     pub trophies: u32
 }
 
