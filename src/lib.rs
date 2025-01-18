@@ -5,6 +5,7 @@ use std::collections::BTreeMap;
 use leptos::prelude::*;
 use leptos_dom::helpers::document;
 
+#[plugin_fn]
 pub fn test() {
     let target_element = document().get_element_by_id("test").unwrap();
     mount_to(target_element, || view! {
