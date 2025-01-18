@@ -8,7 +8,8 @@ use leptos_dom::helpers::document;
 #[plugin_fn]
 pub fn test() -> FnResult<String>  {
     let target_element = document().get_element_by_id("test").unwrap();
-    mount_to(target_element, || view! {
+    let target_html_element: HtmlElement = target_element.dyn_into::<HtmlElement>().unwrap();
+    mount_to(target_html_element, || view! {
         <div>
             <h1>"Hello, Leptos!"</h1>
         </div>
