@@ -2,30 +2,6 @@ use extism_pdk::*;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
-use leptos::*;
-use leptos::prelude::*;
-use leptos::tachys::dom::document;
-use leptos::wasm_bindgen::JsCast;
-
-#[component]
-pub fn Hello() -> impl IntoView {
-    view! {
-        <div>
-            <h1 id="test">Hello World</h1>
-        </div>
-    }
-}
-
-#[plugin_fn]
-pub fn test() -> FnResult<()>  {
-    let target_html_element = document().get_element_by_id("test").unwrap().unchecked_into();
-    let _ = mount_to(target_html_element, || view!{
-        <Hello />
-    });
-
-    Ok(())
-}
-
 #[derive(Serialize, Deserialize, ToBytes, FromBytes)]
 #[encoding(Json)]
 pub struct Stats {
