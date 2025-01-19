@@ -2,16 +2,11 @@ use extism_pdk::*;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
-use leptos::prelude::*;
-use leptos::html::HtmlElement;
-use wasm_bindgen::JsCast;
-use web_sys::{Document, HtmlElement, Window};
-
+use leptos::*;
 
 #[plugin_fn]
 pub fn test() -> FnResult<String>  {
-    let target_element = document().get_element_by_id("test").unwrap();
-    mount_to(target_element, || view! {
+    mount_to("test", || view! {
         <div>
             <h1>"Hello, Leptos!"</h1>
         </div>
