@@ -3,10 +3,13 @@ use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
 use leptos::*;
+use leptos::tachys::dom::document;
+use leptos::wasm_bindgen::JsCast;
 
 #[plugin_fn]
 pub fn test() -> FnResult<()>  {
-    leptos::mount_to("test", || view! {
+    let target_html_element = document().get_element_by_id("test").unwrap().unchecked_into();
+    mount::mount_to(target_html_element, || view! {
         <div>
             <h1>"Hello, Leptos!"</h1>
         </div>
