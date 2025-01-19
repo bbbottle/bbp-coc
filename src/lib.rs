@@ -5,13 +5,13 @@ use std::collections::BTreeMap;
 use leptos::*;
 
 #[plugin_fn]
-pub fn test() -> FnResult<String>  {
-    mount_to("test", || view! {
+pub fn test() -> FnResult<()>  {
+    leptos::mount_to("test", || view! {
         <div>
             <h1>"Hello, Leptos!"</h1>
         </div>
     });
-    Ok("DONE".to_string())
+    Ok(())
 }
 
 #[derive(Serialize, Deserialize, ToBytes, FromBytes)]
