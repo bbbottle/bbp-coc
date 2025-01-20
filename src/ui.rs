@@ -1,5 +1,3 @@
-use extism_pdk::error::Error;
-
 // HTML content for the UI
 const HTML_CONTENT: &str = r#"
 <div id="extism-plugin-container">
@@ -16,7 +14,7 @@ document.getElementById('my-button').addEventListener('click', function() {
 "#;
 
 // Generate the HTML and JavaScript content to inject into the specified target element
-pub fn generate_ui() -> Result<String, Error> {
+pub fn generate_ui() -> Result<String> {
     let content = format!(
         r#"
         <div id="test">
