@@ -1,5 +1,6 @@
 use extism_pdk::*;
 use serde::{Deserialize, Serialize};
+use std::collections::BTreeMap;
 
 // ------------------old code------------------
 #[derive(Serialize, Deserialize, ToBytes, FromBytes)]
