@@ -2,6 +2,63 @@ use extism_pdk::*;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
+use leptos::*;
+use ui::HelloButton;
+
+#[derive(Deserialize)]
+struct RenderConfig {
+    container_id: String,
+}
+
+#[plugin_fn]
+pub fn ui(config: String) -> FnResult<String> {
+    let config: RenderConfig = serde_json::from_str(&config)?;
+    
+    // Create simple styles
+    let styles = r#"
+        <style>
+            .hello-container {
+                padding: 16px;
+                font-family: -apple-system, system-ui, sans-serif;
+            }
+            .hello-btn {
+                background: #0366d6;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 14px;
+                transition: background 0.2s;
+            }
+            .hello-btn:hover {
+                background: #0255b3;
+            }
+        </style>
+    "#;
+
+    // Create mount script
+    let mount_script = format!(
+        r#"
+        <script>
+        </script>
+        "#,
+        config.container_id
+    );
+
+    // Render the component
+    let html = leptos::ssr::render_to_string(|| view! { 
+        <HelloButton /> 
+    });
+
+    Ok(format!(
+        "{}{}{}",
+        styles,
+        html,
+        mount_script
+    ))
+}
+
 // ------------------old code------------------
 #[derive(Serialize, Deserialize, ToBytes, FromBytes)]
 #[encoding(Json)]
