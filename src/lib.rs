@@ -84,7 +84,7 @@ impl Plugin {
 
 // Export the plugin
 #[plugin_fn]
-pub fn init(_: ()) -> FnResult<()> {
+pub fn init() -> FnResult<()> {
     let plugin = Plugin::new();
     plugin.init_ui()?;
     Ok(())
