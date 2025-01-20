@@ -7,12 +7,6 @@ use wasm_bindgen::prelude::*;
 use web_sys::{Element, HtmlElement, Window, Document};
 use js_sys::Function;
 
-// Define your plugin's host interface
-#[host_fn]
-extern "C" {
-    fn host_log(msg: &str);
-}
-
 // Structure to hold UI state
 struct PluginUI {
     counter: i32,
