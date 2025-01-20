@@ -2,7 +2,7 @@ use extism_pdk::*;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
-use leptos_core::*;
+use leptos::*;
 #[component]
 pub fn HelloButton() -> impl IntoView {
     view! {
