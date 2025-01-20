@@ -2,86 +2,9 @@ use extism_pdk::*;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
-use wasm_bindgen::prelude::*;
-use web_sys::{Element, HtmlElement, Window, Document};
-use js_sys::Function;
 
-// Structure to hold UI state
-struct PluginUI {
-    counter: i32,
-}
 
-#[derive(Debug, WithoutCopyright)]
-pub struct Plugin {
-    ui: PluginUI,
-}
 
-impl Plugin {
-    pub fn new() -> Self {
-        Self {
-            ui: PluginUI { counter: 0 }
-        }
-    }
-
-    // Initialize the UI
-    pub fn init_ui(&self) -> Result<(), Error> {
-        // Get the window object
-        let window = web_sys::window().expect("no global window exists");
-        let document = window.document().expect("no document exists");
-
-        // Create our UI container
-        let container = document.create_element("div")?;
-        container.set_id("extism-plugin-container");
-        
-        // Create counter display
-        let counter_display = document.create_element("div")?;
-        counter_display.set_id("counter-display");
-        counter_display.set_text_content(Some(&format!("Count: {}", self.ui.counter)));
-
-        // Create increment button
-        let button = document.create_element("button")?;
-        button.set_inner_html("Increment");
-        
-        // Add click event listener
-        let click_handler = Closure::wrap(Box::new(move || {
-            if let Some(display) = document.get_element_by_id("counter-display") {
-                let current = display.text_content()
-                    .unwrap_or_default()
-                    .replace("Count: ", "")
-                    .parse::<i32>()
-                    .unwrap_or(0);
-                display.set_text_content(Some(&format!("Count: {}", current + 1)));
-            }
-        }) as Box<dyn FnMut()>);
-
-        button.add_event_listener_with_callback(
-            "click",
-            click_handler.as_ref().unchecked_ref(),
-        )?;
-        
-        // Keep the closure alive
-        click_handler.forget();
-
-        // Append elements
-        container.append_child(&counter_display)?;
-        container.append_child(&button)?;
-        
-        // Append to document body
-        document.body()
-            .expect("document should have a body")
-            .append_child(&container)?;
-
-        Ok(())
-    }
-}
-
-// Export the plugin
-#[plugin_fn]
-pub fn init(_: ()) -> FnResult<()> {
-    let plugin = Plugin::new();
-    plugin.init_ui()?;
-    Ok(())
-}
 
 // ------------------old code------------------
 
