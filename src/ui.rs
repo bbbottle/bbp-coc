@@ -1,3 +1,5 @@
+use std::error::Error;
+
 // HTML content for the UI
 const HTML_CONTENT: &str = r#"
 <div id="extism-plugin-container">
