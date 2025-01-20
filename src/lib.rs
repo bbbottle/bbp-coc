@@ -3,16 +3,6 @@ use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
 
-mod ui;
-
-#[plugin_fn]
-pub fn init() -> FnResult<String> {
-    // Generate the HTML and JavaScript content
-    let content = ui::generate_ui();
-    Ok(content)
-}
-
-
 // ------------------old code------------------
 
 #[derive(Serialize, Deserialize, ToBytes, FromBytes)]
