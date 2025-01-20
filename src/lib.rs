@@ -3,16 +3,28 @@ use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
 use leptos::*;
-use ui::HelloButton;
+#[component]
+pub fn HelloButton() -> impl IntoView {
+    let (count, set_count) = create_signal(0);
+    let on_click = move |_| {
+        set_count.update(|n| *n + 1);
+    };
 
-#[derive(Deserialize)]
-struct RenderConfig {
-    container_id: String,
+    view! {
+        <div class="hello-container">
+            <button 
+                class="hello-btn"
+                on:click=on_click
+            >
+                "Hello World! (clicked " {count} " times)"
+            </button>
+        </div>
+    }
 }
 
+
 #[plugin_fn]
-pub fn ui(config: String) -> FnResult<String> {
-    let config: RenderConfig = serde_json::from_str(&config)?;
+pub fn ui() -> FnResult<String> {
     
     // Create simple styles
     let styles = r#"
@@ -38,13 +50,6 @@ pub fn ui(config: String) -> FnResult<String> {
     "#;
 
     // Create mount script
-    let mount_script = format!(
-        r#"
-        <script>
-        </script>
-        "#,
-        config.container_id
-    );
 
     // Render the component
     let html = leptos::ssr::render_to_string(|| view! { 
@@ -52,10 +57,9 @@ pub fn ui(config: String) -> FnResult<String> {
     });
 
     Ok(format!(
-        "{}{}{}",
+        "{}{}",
         styles,
         html,
-        mount_script
     ))
 }
 
