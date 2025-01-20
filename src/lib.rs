@@ -12,7 +12,6 @@ struct PluginUI {
     counter: i32,
 }
 
-#[derive(Debug, WithoutCopyright)]
 pub struct Plugin {
     ui: PluginUI,
 }
@@ -84,9 +83,7 @@ pub fn init() -> FnResult<()> {
     Ok(())
 }
 
-
 // ------------------old code------------------
-
 #[derive(Serialize, Deserialize, ToBytes, FromBytes)]
 #[encoding(Json)]
 pub struct Stats {
