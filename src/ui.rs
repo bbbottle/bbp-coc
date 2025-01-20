@@ -14,7 +14,7 @@ document.getElementById('my-button').addEventListener('click', function() {
 "#;
 
 // Generate the HTML and JavaScript content to inject into the specified target element
-pub fn generate_ui() -> Result<String, E> {
+pub fn generate_ui() -> Result<String, Error> {
     let content = format!(
         r#"
         <div id="test">
