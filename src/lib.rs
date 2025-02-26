@@ -1,13 +1,15 @@
 use extism_pdk::*;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
+use chrono::{DateTime, Utc}; // 0.4.10
+
 
 #[derive(Serialize, Deserialize, ToBytes, FromBytes)]
 #[encoding(Json)]
 pub struct Stats {
     pub tag: String,
     pub name: String,
-    pub created_at: String,
+    pub created_at: DateTime<Utc>,
     pub trophies: u32,
 }
 
@@ -20,7 +22,7 @@ impl Stats {
     fn to_html(&self) -> String {
         format!(
             "<div>{}(<code>{}</code>)</div>",
-            self.created_at, self.trophies
+             self.created_at.format("%Y-%m-%d %H:%M:%S"), self.trophies
         )
     }
 }
