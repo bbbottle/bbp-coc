@@ -9,7 +9,7 @@ use chrono::{DateTime, Utc}; // 0.4.10
 pub struct Stats {
     pub tag: String,
     pub name: String,
-    pub created_at: DateTime<Utc>,
+    pub created_at: String,
     pub trophies: u32,
 }
 
@@ -20,9 +20,10 @@ extern "ExtismHost" {
 
 impl Stats {
     fn to_html(&self) -> String {
+        let date = self.created_at.parse::<DateTime<Utc>>().unwrap();
         format!(
             "<div>{}(<code>{}</code>)</div>",
-             self.created_at.format("%Y-%m-%d %H:%M:%S"), self.trophies
+             date.format("%Y-%m-%d %H:%M:%S"), self.trophies
         )
     }
 }
