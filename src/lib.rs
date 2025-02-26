@@ -24,7 +24,7 @@ impl Stats {
                 {}
                 <img width=28 height=28 cross-origin='anonymous' src={} />
             </div>",
-            self.name, self.tag, self.trophies, self.league_icon
+            self.name, self.tag, self.trophies, self.leagueIcon
         )
     }
 }
