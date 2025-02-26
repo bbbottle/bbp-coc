@@ -7,7 +7,7 @@ use std::collections::BTreeMap;
 pub struct Stats {
     pub tag: String,
     pub name: String,
-    pub leagueIcon: String,
+    pub created_at: string,
     pub trophies: u32,
 }
 
@@ -19,12 +19,8 @@ extern "ExtismHost" {
 impl Stats {
     fn to_html(&self) -> String {
         format!(
-            "<div>{}(<code>{})</code></div>
-            <div class='flex'>
-                {}
-                <img width=28 height=28 cross-origin='anonymous' src={} />
-            </div>",
-            self.name, self.tag, self.trophies, self.leagueIcon
+            "<div>{}(<code>{}</code>)</div>",
+            self.created_at, self.trophies
         )
     }
 }
