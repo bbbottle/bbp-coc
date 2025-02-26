@@ -7,7 +7,7 @@ use std::collections::BTreeMap;
 pub struct Stats {
     pub tag: String,
     pub name: String,
-    pub league_icon: String,
+    pub leagueIcon: String,
     pub trophies: u32,
 }
 
