@@ -57,7 +57,8 @@ pub fn coc() -> FnResult<String> {
             {res?.iter().map(|r| {
                 html!(
                     <tr>
-                        {r.to_html()}
+                    <td>{r.trophies}</td>
+                    <td><small>{r.created_at.parse::<DateTime<Utc>>().unwrap().format("%Y-%m-%d %H:%M:%S");}</small></td>
                     </tr>
                 )
             })}
