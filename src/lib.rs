@@ -54,9 +54,13 @@ pub fn coc() -> FnResult<String> {
                 <th>"Trophies"</th>
                 <th>"Date"</th>
             </tr>
-            { for r in res?.iter() {
-                html!(<tr>{r.to_html()}</tr>)
-            }}
+            {res?.iter().map(|r| {
+                html!(
+                    <tr>
+                        {r.to_html()}
+                    </tr>
+                )
+            })}
         </table>
     ).to_string();
 
