@@ -48,7 +48,7 @@ pub fn coc() -> FnResult<String> {
     let api = String::from("https://api.bbki.ng/coc");
     let res = fetch_stats(&api);
 
-    let doc_str = html! {
+    let doc_str = html!(
         <table>
             <tr>
                 <th>"Trophies"</th>
@@ -60,7 +60,7 @@ pub fn coc() -> FnResult<String> {
                 </tr>
             }}
         </table>
-    }.to_string();
+    ).to_string();
 
     unsafe {
         let _ = loading("false".to_string());
