@@ -55,9 +55,7 @@ pub fn coc() -> FnResult<String> {
                 <th>"Date"</th>
             </tr>
             { for r in res?.iter() {
-                <tr>
-                    {r.to_html()}
-                </tr>
+                html!(<tr>{r.to_html()}</tr>)
             }}
         </table>
     ).to_string();
