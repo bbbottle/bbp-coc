@@ -2,6 +2,7 @@ use extism_pdk::*;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 use chrono::{DateTime, Utc}; // 0.4.10
+use axohtml::{html};
 
 
 #[derive(Serialize, Deserialize, ToBytes, FromBytes)]
