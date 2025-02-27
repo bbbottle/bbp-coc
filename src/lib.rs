@@ -22,8 +22,8 @@ impl Stats {
     fn to_html(&self) -> String {
         let date = self.created_at.parse::<DateTime<Utc>>().unwrap();
         format!(
-            "<div>{}(<code>{}</code>)</div>",
-             date.format("%Y-%m-%d %H:%M:%S"), self.trophies
+            "<code>{}</code><small>{}</small>",
+            self.trophies, date.format("%Y-%m-%d %H:%M:%S")
         )
     }
 }
