@@ -22,7 +22,7 @@ impl Stats {
     fn to_html(&self) -> String {
         let date = self.created_at.parse::<DateTime<Utc>>().unwrap();
         format!(
-            "<code>{}</code><small>{}</small>",
+            "<td>{}</td><td><small>{}</small></td>",
             self.trophies, date.format("%Y-%m-%d %H:%M:%S")
         )
     }
@@ -47,11 +47,23 @@ pub fn coc() -> FnResult<String> {
     let api = String::from("https://api.bbki.ng/coc");
     let res = fetch_stats(&api);
 
-    let content: Vec<String> = res?.iter()
-        .map(|r| r.to_html())
-        .collect();
+    let doc_str = html! {
+        <table>
+            <tr>
+                <th>Trophies</th>
+                <th>Date</th>
+            </tr>
+            { for r in res?.iter() {
+                <tr>
+                    {r.to_html()}
+                </tr>
+            }}
+        </table>
+    }.to_string();
+
     unsafe {
         let _ = loading("false".to_string());
     };
-    Ok(content.join("\r\n"))
+
+    Ok(doc_str);
 }
