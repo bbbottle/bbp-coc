@@ -51,8 +51,8 @@ pub fn coc() -> FnResult<String> {
     let doc_str = html! {
         <table>
             <tr>
-                <th>Trophies</th>
-                <th>Date</th>
+                <th>"Trophies"</th>
+                <th>"Date"</th>
             </tr>
             { for r in res?.iter() {
                 <tr>
