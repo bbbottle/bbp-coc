@@ -2,7 +2,8 @@ use extism_pdk::*;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 use chrono::{DateTime, Utc}; // 0.4.10
-use axohtml::{html};
+use axohtml::{html, text};
+use axohtml::dom::DOMTree;
 
 
 #[derive(Serialize, Deserialize, ToBytes, FromBytes)]
@@ -27,6 +28,11 @@ impl Stats {
             self.trophies, date.format("%Y-%m-%d %H:%M:%S")
         )
     }
+    
+    fn get_time(&self) -> String {
+        let date = self.created_at.parse::<DateTime<Utc>>().unwrap();
+        date.format("%Y-%m-%d %H:%M:%S").to_string()
+    }
 }
 
 fn fetch_stats(api: &String) -> FnResult<Vec<Stats>> {
@@ -45,29 +51,35 @@ pub fn coc() -> FnResult<String> {
     unsafe {
         let _ = loading("true".to_string());
     };
-    let api = String::from("https://api.bbki.ng/coc");
-    let res = fetch_stats(&api);
 
-    let doc_str = html!(
+    let api = String::from("https://api.bbki.ng/coc");
+    let _res = fetch_stats(&api);
+    if _res.is_err() {
+        return Ok("Failed to fetch data".to_string());
+    }
+    
+    let doc_str: DOMTree<String>= html!(
         <table>
-            <tr>
-                <th>"Trophies"</th>
-                <th>"Date"</th>
-            </tr>
-            {res?.iter().map(|r| {
-                html!(
-                    <tr>
-                    <td>{r.trophies}</td>
-                    <td><small>{r.created_at.parse::<DateTime<Utc>>().unwrap().format("%Y-%m-%d %H:%M:%S");}</small></td>
-                    </tr>
-                )
-            })}
+            <thead>
+                <tr>
+                    <th>"Trophies"</th>
+                    <th>"Created At"</th>
+                </tr>
+            </thead>
+            <tbody>
+            {_res?.iter().map(|stat| html!(
+                <tr>
+                    <td>{ text!(stat.trophies.to_string())}</td>
+                    <td><small>{ text!(stat.get_time()) }</small></td>
+                </tr>
+            ))}
+            </tbody>
         </table>
-    ).to_string();
+    );
 
     unsafe {
         let _ = loading("false".to_string());
     };
 
-    Ok(doc_str);
+    Ok(doc_str.to_string())
 }
