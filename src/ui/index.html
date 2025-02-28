@@ -1,0 +1,52 @@
+<html lang="en-US">
+<head>
+    <title>coc</title>
+    <style>
+        .container {
+            display: grid;
+            place-items: center;
+            height: 100%;
+        }
+
+        .view-port {
+            aspect-ratio: 16 / 9;
+            width: 90%;
+            max-width: 1280px;
+            margin-top: -280px;
+            overflow: auto;
+            ::-webkit-scrollbar {
+                display: none;
+            }
+            scrollbar-width: none;
+            /*overscroll-behavior: contain;*/
+        }
+
+        .content {
+            width: 1280px;
+            height: 1003px;
+            position: relative;
+        }
+
+        .town-hall {
+            position: absolute;
+            top: 41%;
+            left: 52%;
+            transform: translate(-50%, -50%);
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="view-port">
+        <div class="content">
+            <img src="https://zjh-im-res.oss-cn-shenzhen.aliyuncs.com/coc_res/coc_res/Scenery_Ingame_Books_of_Clash.png"
+                 crossorigin="anonymous" />
+            <img src="https://zjh-im-res.oss-cn-shenzhen.aliyuncs.com/coc_res/coc_res/Building_HV_Town_Hall_level_11.png" width="80" class="town-hall"
+                 crossorigin="anonymous"
+            />
+        </div>
+    </div>
+</div>
+</body>
+</html>
