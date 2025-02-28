@@ -5,6 +5,8 @@ use chrono::{DateTime, Utc}; // 0.4.10
 use axohtml::{html, text};
 use axohtml::dom::DOMTree;
 
+const HTML_TPL: &str = include_str!("./assets/index.tpl.html");
+
 
 #[derive(Serialize, Deserialize, ToBytes, FromBytes)]
 #[encoding(Json)]
@@ -21,14 +23,6 @@ extern "ExtismHost" {
 }
 
 impl Stats {
-    fn to_html(&self) -> String {
-        let date = self.created_at.parse::<DateTime<Utc>>().unwrap();
-        format!(
-            "<td>{}</td><td><small>{}</small></td>",
-            self.trophies, date.format("%Y-%m-%d %H:%M:%S")
-        )
-    }
-    
     fn get_time(&self) -> String {
         let date = self.created_at.parse::<DateTime<Utc>>().unwrap();
         date.format("%Y-%m-%d %H:%M:%S").to_string()
@@ -46,6 +40,45 @@ fn fetch_stats(api: &String) -> FnResult<Vec<Stats>> {
     Ok(res.json::<Vec<Stats>>()?)
 }
 
+fn render_html(body: String) -> String {
+    HTML_TPL.replace("{{content}}", &body)
+}
+
+fn render_stats_table(stats: Vec<Stats>) -> String {
+    let doc_str: DOMTree<String> = html!(
+        <table>
+            <thead>
+                <tr>
+                    <th>"Trophies"</th>
+                    <th>"Created At"</th>
+                </tr>
+            </thead>
+            <tbody>
+            {stats.iter().map(|stat| html!(
+                <tr>
+                    <td>{ text!(stat.trophies.to_string())}</td>
+                    <td><small>{ text!(stat.get_time()) }</small></td>
+                </tr>
+            ))}
+            </tbody>
+        </table>
+    );
+
+    doc_str.to_string()
+}
+
+#[plugin_fn]
+pub fn ui() -> FnResult<String> {
+    let api = String::from("https://api.bbki.ng/coc");
+    let _res = fetch_stats(&api);
+    if _res.is_err() {
+        return Ok("Failed to fetch data".to_string());
+    }
+
+    let table = render_stats_table(_res?);
+    Ok(render_html(table))
+}
+
 #[plugin_fn]
 pub fn coc() -> FnResult<String> {
     unsafe {
@@ -57,29 +90,12 @@ pub fn coc() -> FnResult<String> {
     if _res.is_err() {
         return Ok("Failed to fetch data".to_string());
     }
-    
-    let doc_str: DOMTree<String>= html!(
-        <table>
-            <thead>
-                <tr>
-                    <th>"Trophies"</th>
-                    <th>"Created At"</th>
-                </tr>
-            </thead>
-            <tbody>
-            {_res?.iter().map(|stat| html!(
-                <tr>
-                    <td>{ text!(stat.trophies.to_string())}</td>
-                    <td><small>{ text!(stat.get_time()) }</small></td>
-                </tr>
-            ))}
-            </tbody>
-        </table>
-    );
+
+    let table = render_stats_table(_res?);
 
     unsafe {
         let _ = loading("false".to_string());
     };
 
-    Ok(doc_str.to_string())
+    Ok(table)
 }
