@@ -5,7 +5,7 @@ use chrono::{DateTime, Utc}; // 0.4.10
 use axohtml::{html, text};
 use axohtml::dom::DOMTree;
 
-const HTML_TPL: &str = include_str!("./assets/index.tpl.html");
+const HTML_TPL: &str = include_str!("./ui/index.html");
 
 
 #[derive(Serialize, Deserialize, ToBytes, FromBytes)]
